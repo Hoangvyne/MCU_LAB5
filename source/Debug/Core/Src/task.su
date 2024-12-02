@@ -1,0 +1,2 @@
+task.c:21:6:first_uart_call	8	static
+task.c:25:6:HAL_UART_RxCpltCallback	16	static
