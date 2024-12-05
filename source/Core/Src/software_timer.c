@@ -1,9 +1,4 @@
-/*
- * software_timer.c
- *
- *  Created on: Dec 3, 2022
- *      Author: DLCH
- */
+
 
 #include "main.h"
 

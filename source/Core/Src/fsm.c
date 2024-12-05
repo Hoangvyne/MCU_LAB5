@@ -1,9 +1,4 @@
-/*
- * fsm.c
- *
- *  Created on: Dec 3, 2022
- *      Author: DLCH
- */
+
 #include "main.h"
 #include "software_timer.h"
 #include "fsm.h"

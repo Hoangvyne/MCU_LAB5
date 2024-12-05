@@ -21,15 +21,15 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, ALLOC, LOAD, DATA
   8 .data         00000070  20000000  08003fc0  00020000  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  9 .bss          0000019c  20000070  08004030  00020070  2**2
+  9 .bss          00000188  20000070  08004030  00020070  2**2
                   ALLOC
- 10 ._user_heap_stack 00000604  2000020c  08004030  0002020c  2**0
+ 10 ._user_heap_stack 00000600  200001f8  08004030  000201f8  2**0
                   ALLOC
  11 .ARM.attributes 00000029  00000000  00000000  00020070  2**0
                   CONTENTS, READONLY
- 12 .debug_info   00011184  00000000  00000000  00020099  2**0
+ 12 .debug_info   00011185  00000000  00000000  00020099  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 00002575  00000000  00000000  0003121d  2**0
+ 13 .debug_abbrev 00002577  00000000  00000000  0003121e  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  14 .debug_aranges 00000db8  00000000  00000000  00033798  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
@@ -709,17 +709,17 @@ static void MX_TIM2_Init(void)
  80004cc:	4b1d      	ldr	r3, [pc, #116]	; (8000544 <MX_TIM2_Init+0x94>)
  80004ce:	f04f 4280 	mov.w	r2, #1073741824	; 0x40000000
  80004d2:	601a      	str	r2, [r3, #0]
-  htim2.Init.Prescaler = 7;
+  htim2.Init.Prescaler = 7999;
  80004d4:	4b1b      	ldr	r3, [pc, #108]	; (8000544 <MX_TIM2_Init+0x94>)
- 80004d6:	2207      	movs	r2, #7
- 80004d8:	605a      	str	r2, [r3, #4]
+ 80004d6:	f641 723f 	movw	r2, #7999	; 0x1f3f
+ 80004da:	605a      	str	r2, [r3, #4]
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
- 80004da:	4b1a      	ldr	r3, [pc, #104]	; (8000544 <MX_TIM2_Init+0x94>)
- 80004dc:	2200      	movs	r2, #0
- 80004de:	609a      	str	r2, [r3, #8]
-  htim2.Init.Period = 9999;
- 80004e0:	4b18      	ldr	r3, [pc, #96]	; (8000544 <MX_TIM2_Init+0x94>)
- 80004e2:	f242 720f 	movw	r2, #9999	; 0x270f
+ 80004dc:	4b19      	ldr	r3, [pc, #100]	; (8000544 <MX_TIM2_Init+0x94>)
+ 80004de:	2200      	movs	r2, #0
+ 80004e0:	609a      	str	r2, [r3, #8]
+  htim2.Init.Period = 9;
+ 80004e2:	4b18      	ldr	r3, [pc, #96]	; (8000544 <MX_TIM2_Init+0x94>)
+ 80004e4:	2209      	movs	r2, #9
  80004e6:	60da      	str	r2, [r3, #12]
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
  80004e8:	4b16      	ldr	r3, [pc, #88]	; (8000544 <MX_TIM2_Init+0x94>)
@@ -1670,7 +1670,7 @@ void *_sbrk(ptrdiff_t incr)
  8000968:	20002800 	.word	0x20002800
  800096c:	00000400 	.word	0x00000400
  8000970:	200000a0 	.word	0x200000a0
- 8000974:	20000210 	.word	0x20000210
+ 8000974:	200001f8 	.word	0x200001f8
 
 08000978 <SystemInit>:
   * @note   This function should be used only after reset.
@@ -1743,10 +1743,10 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
  80009d0:	7819      	ldrb	r1, [r3, #0]
  80009d2:	4b0e      	ldr	r3, [pc, #56]	; (8000a0c <HAL_UART_RxCpltCallback+0x6c>)
  80009d4:	5499      	strb	r1, [r3, r2]
-		if(index_buffer >= 30) index_buffer = 0;
+		if(index_buffer >= 10) index_buffer = 0;
  80009d6:	4b0c      	ldr	r3, [pc, #48]	; (8000a08 <HAL_UART_RxCpltCallback+0x68>)
  80009d8:	781b      	ldrb	r3, [r3, #0]
- 80009da:	2b1d      	cmp	r3, #29
+ 80009da:	2b09      	cmp	r3, #9
  80009dc:	d902      	bls.n	80009e4 <HAL_UART_RxCpltCallback+0x44>
  80009de:	4b0a      	ldr	r3, [pc, #40]	; (8000a08 <HAL_UART_RxCpltCallback+0x68>)
  80009e0:	2200      	movs	r2, #0
@@ -1858,7 +1858,7 @@ LoopFillZerobss:
   ldr r2, =_sbss
  8000a54:	20000070 	.word	0x20000070
   ldr r4, =_ebss
- 8000a58:	2000020c 	.word	0x2000020c
+ 8000a58:	200001f8 	.word	0x200001f8
 
 08000a5c <ADC1_2_IRQHandler>:
  * @retval : None
@@ -2006,7 +2006,7 @@ __weak void HAL_IncTick(void)
  8000b04:	bc80      	pop	{r7}
  8000b06:	4770      	bx	lr
  8000b08:	20000008 	.word	0x20000008
- 8000b0c:	200001f8 	.word	0x200001f8
+ 8000b0c:	200001e4 	.word	0x200001e4
 
 08000b10 <HAL_GetTick>:
   * @note  This function is declared as __weak to be overwritten in case of other
@@ -2025,7 +2025,7 @@ __weak uint32_t HAL_GetTick(void)
  8000b1a:	46bd      	mov	sp, r7
  8000b1c:	bc80      	pop	{r7}
  8000b1e:	4770      	bx	lr
- 8000b20:	200001f8 	.word	0x200001f8
+ 8000b20:	200001e4 	.word	0x200001e4
 
 08000b24 <HAL_ADC_Init>:
   *         of structure "ADC_InitTypeDef".
@@ -10806,19 +10806,19 @@ static void UART_SetConfig(UART_HandleTypeDef *huart)
  8003efe:	b103      	cbz	r3, 8003f02 <_sbrk_r+0x1a>
  8003f00:	6023      	str	r3, [r4, #0]
  8003f02:	bd38      	pop	{r3, r4, r5, pc}
- 8003f04:	200001fc 	.word	0x200001fc
+ 8003f04:	200001e8 	.word	0x200001e8
 
 08003f08 <__malloc_lock>:
  8003f08:	4801      	ldr	r0, [pc, #4]	; (8003f10 <__malloc_lock+0x8>)
  8003f0a:	f000 b811 	b.w	8003f30 <__retarget_lock_acquire_recursive>
  8003f0e:	bf00      	nop
- 8003f10:	20000204 	.word	0x20000204
+ 8003f10:	200001f0 	.word	0x200001f0
 
 08003f14 <__malloc_unlock>:
  8003f14:	4801      	ldr	r0, [pc, #4]	; (8003f1c <__malloc_unlock+0x8>)
  8003f16:	f000 b80c 	b.w	8003f32 <__retarget_lock_release_recursive>
  8003f1a:	bf00      	nop
- 8003f1c:	20000204 	.word	0x20000204
+ 8003f1c:	200001f0 	.word	0x200001f0
 
 08003f20 <_malloc_usable_size_r>:
  8003f20:	f851 3c04 	ldr.w	r3, [r1, #-4]

@@ -1,9 +1,3 @@
-/*
- * task.c
- *
- *  Created on: Dec 3, 2022
- *      Author: DLCH
- */
 
 #ifndef SRC_TASK_C_
 #define SRC_TASK_C_
